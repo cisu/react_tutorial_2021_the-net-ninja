@@ -23,6 +23,18 @@
       "body": "asdad",
       "author": "mario",
       "id": 4
+    },
+    {
+      "title": "blog1",
+      "body": "fdsfds",
+      "author": "mario",
+      "id": 5
+    },
+    {
+      "title": "blog3",
+      "body": "blog343432",
+      "author": "yoshi",
+      "id": 6
     }
   ]
 }
