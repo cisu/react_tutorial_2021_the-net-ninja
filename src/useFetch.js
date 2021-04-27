@@ -1,7 +1,7 @@
 import react, {useState, useEffect} from 'react'
 
-const useFetch = (url) => {
 
+const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null)
@@ -9,10 +9,12 @@ const useFetch = (url) => {
 
     useEffect(() => {
 
+        const abortCont = new AbortController();
+
         setTimeout(() =>{
 
 
-            fetch(url)
+            fetch(url, { signal: abortCont.signal })
                 .then(res => {
                     if(!res.ok){
                         throw Error('could not fetch the data fro that resource')
@@ -24,11 +26,18 @@ const useFetch = (url) => {
                     setIsPending(false);
                 })
                 .catch((err) => {
-                    setError(err.message)
-                    setIsPending(false)
+                    if (err.name === 'AbortError'){
+                        console.log('fetch aborted')
+                    } else{
+                        setError(err.message)
+                        setIsPending(false)
+                    }
+                   
                 })
 
         },1000)
+
+        return () => abortCont.abort();
         
     }, [url]);
 
