@@ -7,7 +7,9 @@ const Home = () => {
         { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
         { title: 'Welcome party!', body: 'lorem ipsum...', author: 'george', id: 2 },
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ])
+    ]);
+
+    const [name, setName] = useState('mario');
 
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !==id);
@@ -17,8 +19,9 @@ const Home = () => {
 
     useEffect(() => {
         console.log('use effect run');
+        console.log(name);
         console.log(blogs);
-    });
+    }, [name]);
 
 
     return (
@@ -28,6 +31,9 @@ const Home = () => {
           title='All Blog!' 
           handleDelete={handleDelete}
           />
+
+          <button onClick={() => setName('luigi')} >Change name</button>
+          <p>{name}</p>
           {/* <BlogList 
           dataBLogs={blogs.filter((blog) => blog.author === 'mario')} title="Mario's blogs"
           handleDelete={handleDelete}
