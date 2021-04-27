@@ -12,11 +12,14 @@ const Home = () => {
     return (
         <div className='home'>
           <BlogList dataBLogs={blogs} title='All Blog!'/>
+          <BlogList dataBLogs={blogs.filter((blog) => blog.author === 'mario')} title="Mario's blogs"/>
         </div>
     )    
 }
 
 export default Home
+
+
 
 
 /*
